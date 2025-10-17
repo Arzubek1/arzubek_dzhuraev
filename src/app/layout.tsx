@@ -1,35 +1,44 @@
 import type { Metadata } from "next";
-import "./globals.scss";
-import RootContext from "@/context/RootContext";
 import { StrictMode } from "react";
-import { JetBrains_Mono } from "next/font/google";
-import { Inconsolata } from "next/font/google";
+import "./globals.scss";
+
+import RootContext from "@/context/RootContext";
+import LayoutSite from "@/components/layout/LayoutSite";
+
+import { JetBrains_Mono, Inconsolata } from "next/font/google";
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
+
 const inconsolata = Inconsolata({
   variable: "--font-inconsolata",
-  subsets: ["latin"]
-})
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Arzubek | Fullstack Developer",
+  title: "Arzubek | Frontend Developer",
   description: "Portfolio showcasing web development and creative coding.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
-
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${jetBrainsMono.variable} ${inconsolata.variable}`}>
+    <html lang="en" className={`${jetBrainsMono.variable} ${inconsolata.variable}`}>
+      <body>
         <StrictMode>
-          <RootContext>{children}</RootContext>
+          <RootContext>
+            <LayoutSite>{children}</LayoutSite>
+          </RootContext>
         </StrictMode>
       </body>
     </html>
